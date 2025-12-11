@@ -1,9 +1,15 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+/**
+ * Root route redirects to the Projects dashboard.
+ */
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-white flex items-center justify-center">
-      <h1 className="text-black text-4xl font-light">
-        lovable_frontend_app is being generated
-      </h1>
-    </main>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.replace("/projects");
+  }, [router]);
+  return null;
 }
