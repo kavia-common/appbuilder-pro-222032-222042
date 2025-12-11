@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lovable Frontend App
 
-## Getting Started
+Next.js frontend for onboarding, chat-driven requirements, live preview, editing, versioning, export and deploy actions.
 
-First, run the development server:
+Ports
+- Frontend: 3000
+- Backend (paired): 3001
+- Database (paired): 5000 (logical)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Setup
+1) Copy env:
+   cp .env.example .env
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2) Install and run:
+   npm install
+   npm run dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Environment variables
+- NEXT_PUBLIC_BACKEND_URL: Backend HTTP base (e.g., http://localhost:3001)
+- (Optional) NEXT_PUBLIC_WS_URL: WebSocket base if different from BACKEND_URL, e.g., ws://localhost:3001
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+End-to-end (UI)
+1) Login with your email to obtain a token (dev dummy).
+2) Create a project from the dashboard.
+3) Start a chat session and request generation.
+4) Watch live token stream and diffs; open preview; make edits; snapshot versions.
+5) Export or Deploy from the project actions.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Notes
+- Ensure CORS/FRONTEND_ORIGIN in backend allows http://localhost:3000 for local dev.
+- Keep NEXT_PUBLIC_BACKEND_URL in sync with your backend host/port.
