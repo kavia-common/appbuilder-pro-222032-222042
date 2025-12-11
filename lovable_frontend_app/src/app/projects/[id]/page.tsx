@@ -1,5 +1,7 @@
 "use client";
 
+export { generateStaticParams } from "./generateStaticParams";
+
 import React from "react";
 import { useParams } from "next/navigation";
 import ChatPanel from "@/components/workspace/ChatPanel";

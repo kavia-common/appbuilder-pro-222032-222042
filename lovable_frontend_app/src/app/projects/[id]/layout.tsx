@@ -3,28 +3,21 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
+import TemplatePicker from "@/components/workspace/TemplatePicker";
+import VersionList from "@/components/workspace/VersionList";
+import ExportButton from "@/components/workspace/ExportButton";
 
 /**
  * PUBLIC_INTERFACE
- * WorkspaceLayout provides the shell for project workspace with tabs for Chat, Editor, Preview, and Deploy.
+ * WorkspaceLayout provides the shell for project workspace with tabs for Chat, Editor, Preview, and Deploy,
+ * plus a left sidebar for templates, versions, and export.
  */
 export const dynamic = "force-static";
-
-/**
- * PUBLIC_INTERFACE
- * generateStaticParams provides at least one placeholder to satisfy static export builds.
- * In real deployments, this should enumerate actual project IDs.
- */
-export async function generateStaticParams() {
-  // Provide an empty array for no pre-rendered ids and rely on client-side navigation,
-  // but Next.js export requires the function to exist for dynamic routes.
-  return [];
-}
 
 export default function WorkspaceLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const params = useParams<{ id: string }>();
-  const projectId = params?.id;
+  const projectId = params?.id as string;
 
   const tabs = [
     { name: "Chat", href: `/projects/${projectId}` },
@@ -63,7 +56,21 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </div>
-      <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-4">{children}</main>
+
+      <div className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-4 grid grid-cols-12 gap-4">
+        <aside className="col-span-4 lg:col-span-3 space-y-6">
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <TemplatePicker projectId={projectId} />
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <VersionList projectId={projectId} />
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <ExportButton projectId={projectId} />
+          </div>
+        </aside>
+        <main className="col-span-8 lg:col-span-9">{children}</main>
+      </div>
     </div>
   );
 }

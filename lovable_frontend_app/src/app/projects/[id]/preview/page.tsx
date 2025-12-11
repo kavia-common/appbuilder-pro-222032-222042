@@ -1,5 +1,7 @@
 "use client";
 
+export { generateStaticParams } from "../gsp";
+
 import React from "react";
 import { useParams } from "next/navigation";
 import PreviewPanel from "@/components/workspace/PreviewPanel";
